@@ -1,0 +1,19 @@
+body {
+    height: 100vh;
+    margin: 0;
+    align-content: center;
+}
+
+table {
+    margin: auto;
+}
+
+td {
+    border: 1px solid;
+    width: 45px;
+    height: 45px;
+
+    &.block {
+        background-color: grey;
+    }
+}
