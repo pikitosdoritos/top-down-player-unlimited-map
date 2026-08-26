@@ -27,7 +27,7 @@ function showMap() {
     const { colCount, rowCount } = calculateDimensions()
     const visibleAreaData = getVisibleArea(colCount, rowCount)
 
-    renderBoard(visibleAreaData)
+    renderMap(visibleAreaData)
 }
 
 function calculateDimensions() {
@@ -49,6 +49,11 @@ function getVisibleArea(colCount, rowCount) {
         const row = []
 
         for (let x = xMin; x < xMax; x++) {
+            if (x == playerCoords[0] && y == playerCoords[1]) {
+                row.push(null)
+                continue
+            }
+
             cell = mapState[`${x}, ${y}`]
 
             if (cell === undefined) {
@@ -66,7 +71,7 @@ function getVisibleArea(colCount, rowCount) {
     return data
 }
 
-function renderBoard(visibleAreaData) {
+function renderMap(visibleAreaData) {
     const table = document.querySelector('table')
     let html = ''
 
@@ -74,7 +79,9 @@ function renderBoard(visibleAreaData) {
         html += '<tr>'
 
         for (const cell of row) {
-            html += `<td ${cell ? 'class="block"' : ''}></td>`
+            html += `<td ${cell ? 'class="block"' : ''}>${
+                cell === null ? '<img src="images/pixel_hero.png">' : ''
+            }</td>`
         }
         html += '</tr>'
     }

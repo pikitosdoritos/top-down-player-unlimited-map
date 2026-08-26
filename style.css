@@ -16,4 +16,10 @@ td {
     &.block {
         background-color: grey;
     }
+
+    img {
+        height: 100%;
+        display: block;
+        margin: auto;
+    }
 }
