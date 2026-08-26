@@ -6,18 +6,22 @@ const moves = {
     ArrowDown: [0, 1],
     ArrowLeft: [-1, 0],
 }
-const mapState = {}
+const mapState = {
+    '0, 0': false
+}
 const cellSize = 50
-const probability = 0.1
+const probability = 0.5
 
 showMap()
 onkeydown = handleKeys
 
 function handleKeys(e) {
     const key = e.key
+    const targetCoords = [playerCoords[0] + moves[key][0], playerCoords[1] + moves[key][1]]
+    const empty = !mapState[`${targetCoords[0]}, ${targetCoords[1]}`]
 
-    if (key in moves) {
-        playerCoords = [playerCoords[0] + moves[key][0], playerCoords[1] + moves[key][1]]
+    if (key in moves && empty) {
+        playerCoords = targetCoords
     }
 
     showMap()
@@ -79,9 +83,8 @@ function renderMap(visibleAreaData) {
         html += '<tr>'
 
         for (const cell of row) {
-            html += `<td ${cell ? 'class="block"' : ''}>${
-                cell === null ? '<img src="images/pixel_hero.png">' : ''
-            }</td>`
+            html += `<td ${cell ? 'class="block"' : ''}>${cell === null ? '<img src="images/pixel_hero.png">' : ''
+                }</td>`
         }
         html += '</tr>'
     }
