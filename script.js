@@ -1,9 +1,27 @@
+let playerCoords = [0, 0]
+
+const moves = {
+    ArrowUp: [0, -1],
+    ArrowRight: [1, 0],
+    ArrowDown: [0, 1],
+    ArrowLeft: [-1, 0],
+}
 const mapState = {}
-const playerCoords = [0, 0]
 const cellSize = 50
 const probability = 0.1
 
 showMap()
+onkeydown = handleKeys
+
+function handleKeys(e) {
+    const key = e.key
+
+    if (key in moves) {
+        playerCoords = [playerCoords[0] + moves[key][0], playerCoords[1] + moves[key][1]]
+    }
+
+    showMap()
+}
 
 function showMap() {
     const { colCount, rowCount } = calculateDimensions()
